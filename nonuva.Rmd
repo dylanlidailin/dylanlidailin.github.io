@@ -1,5 +1,5 @@
 ---
-title: "uva.rmd"
+title: "non-uva.Rmd"
 output: html_document
 date: "2025-04-04"
 ---
@@ -50,10 +50,10 @@ hourly_avg <- hourly_totals %>%
   summarise(Average_Ridership = mean(Daily_Total_Ridership, na.rm = TRUE), .groups = "drop")
 
 #visualization
-ggplot(filter(hourly_avg, StopType == "UVA Stop"),
+ggplot(filter(hourly_avg, StopType == "Non-UVA Stop"),
        aes(x = Hour, y = Average_Ridership)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Weekday Average Ridership per Hour – UVA Stops",
+  geom_bar(stat = "identity", fill = "firebrick") +
+  labs(title = "Weekday Average Ridership per Hour – Non-UVA Stops",
        x = "Hour of the Day", y = "Average Ridership per Hour") +
   theme_classic() +
   scale_x_continuous(breaks = seq(0, 23, 1))
@@ -92,10 +92,10 @@ hourly_avg <- hourly_totals %>%
   summarise(Average_Ridership = mean(Daily_Total_Ridership, na.rm = TRUE), .groups = "drop")
 
 # Create a static ggplot for UVA Stop
-p <- ggplot(filter(hourly_avg, StopType == "UVA Stop"), 
+p <- ggplot(filter(hourly_avg, StopType == "Non-UVA Stop"), 
             aes(x = Hour, y = Average_Ridership)) +
   geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Weekday Average Ridership per Hour – UVA Stops",
+  labs(title = "Weekday Average Ridership per Hour – Non-UVA Stops",
        subtitle = "Hour: {frame_time}",
        x = "Hour of the Day", y = "Average Ridership per Hour") +
   theme_classic() +
@@ -126,11 +126,11 @@ library(lubridate)
 
 # Filter for UVA Stop, each Hour is a separate 'state' in the animation
 df_anim <- hourly_avg %>%
-  filter(StopType == "UVA Stop")
+  filter(StopType == "Non-UVA Stop")
 
-p <- ggplot(df_anim, aes(x = Hour, y = Average_Ridership)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Weekday Average Ridership per Hour – UVA Stops",
+p1 <- ggplot(df_anim, aes(x = Hour, y = Average_Ridership)) +
+  geom_bar(stat = "identity", fill = "firebrick") +
+  labs(title = "Weekday Average Ridership per Hour – Non-UVA Stops",
        subtitle = "Hour: {closest_state}",
        x = "Hour of the Day", y = "Average Ridership per Hour") +
   theme_classic() +
@@ -142,7 +142,7 @@ p <- ggplot(df_anim, aes(x = Hour, y = Average_Ridership)) +
 # Animate with loop=FALSE so it doesn't repeat
 # (We'll append a static image next, so no need for end_pause)
 anim <- animate(
-  p,
+  p1,
   nframes = 24,
   fps = 4,
   width = 600,
@@ -158,7 +158,7 @@ library(magick)
 img_frames <- image_read(anim)
 
 # Read your final static histogram image
-final_frame <- image_read("images/final_frame.png")
+final_frame <- image_read("images/non_final_frame.png")
 
 # Optional: match size to animation frames
 # e.g., if final_frame is 800x600, but your animation is 600x400:
@@ -174,6 +174,6 @@ final_frame <- image_resize(final_frame, geometry = geometry_string)
 all_frames <- c(img_frames, final_frame)
 
 # Write out the combined GIF
-image_write_gif(all_frames, "comb_uva_histogram.gif", delay = 0.3, loop=0)
+image_write_gif(all_frames, "comb_nonuva_histogram.gif", delay = 0.3, loop=0)
 
 ```
