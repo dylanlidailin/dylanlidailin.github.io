@@ -6,14 +6,15 @@
 	<div class="cs-container">
 	  <div class="cs-content">
 		<span class="cs-topper">UVA Bus Project</span>
-		<h2 class="cs-title">Explore Our Visualizations</h2>
-		<p>Click on any card to see a full display of the visualization.</p>
+		<h2 class="cs-title">Visualizations & Analysis</h2>
+		<p>Click on any card to see the full display of each visualization.</p>
 	  </div>
 	  <ul class="cs-card-group">
 		<!-- Heat Map Card -->
 		<li class="cs-item">
 		  <picture class="cs-picture">
-			<!-- Desktop Thumbnail -->
+			<!-- Optionally, you can add a mobile source if needed -->
+			<source media="(max-width: 600px)" srcset="images/heat_map_thumbnail_mobile.png">
 			<source media="(min-width: 601px)" srcset="images/heat_map_thumbnail.png">
 			<img loading="lazy" decoding="async" src="images/heat_map_thumbnail.png" alt="Heat Map" width="320" height="240">
 		  </picture>
@@ -26,12 +27,12 @@
 		<!-- Non-UVA Ridership Histogram Card -->
 		<li class="cs-item">
 		  <picture class="cs-picture">
-			<!-- Desktop Thumbnail -->
+			<source media="(max-width: 600px)" srcset="images/non_uva_histogram_mobile.png">
 			<source media="(min-width: 601px)" srcset="images/non_uva_histogram.png">
 			<img loading="lazy" decoding="async" src="images/non_uva_histogram.png" alt="Non-UVA Ridership Histogram" width="320" height="240">
 		  </picture>
 		  <div class="cs-info">
-			<h3 class="cs-h3">Non-UVA Ridership Histogram</h3>
+			<h3 class="cs-h3">Non‑UVA Ridership Histogram</h3>
 			<p class="cs-item-text">Explore detailed trends in non‑UVA bus ridership.</p>
 			<a href="non_uva.html" class="cs-button-solid">View Histogram</a>
 		  </div>
@@ -39,7 +40,7 @@
 		<!-- UVA Ridership Histogram Card -->
 		<li class="cs-item">
 		  <picture class="cs-picture">
-			<!-- Desktop Thumbnail -->
+			<source media="(max-width: 600px)" srcset="images/uva_histogram_mobile.png">
 			<source media="(min-width: 601px)" srcset="images/uva_histogram.png">
 			<img loading="lazy" decoding="async" src="images/uva_histogram.png" alt="UVA Ridership Histogram" width="320" height="240">
 		  </picture>
@@ -51,13 +52,5 @@
 		</li>
 	  </ul>
 	</div>
-	
-	<!-- Optional background image (adapted from the hero template) -->
-	<picture class="cs-background">
-	  <source media="(max-width: 600px)" srcset="images/bus.png">
-	  <source media="(min-width: 601px)" srcset="images/bus.png">
-	  <img loading="lazy" decoding="async" src="images/bus.png" alt="background" style="width: 100%; max-width: 600px; height: auto;">
-
-	</picture>
   </section>
   
