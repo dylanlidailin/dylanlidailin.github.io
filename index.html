@@ -4,20 +4,23 @@
   <meta charset="utf-8">
   <title>UVA Bus Project</title>
   <style>
-    /* Basic styling based on the provided template */
-    body {
+    /* Global Styles */
+    html, body {
       margin: 0;
       padding: 0;
       font-family: sans-serif;
       background: #f0f0f0;
       color: #333;
+      scroll-behavior: smooth;
     }
+    /* Container */
     .cs-container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
     }
-    .cs-content {
+    /* Visualizations Section */
+    #visualizations .cs-content {
       text-align: center;
       margin-bottom: 40px;
     }
@@ -37,7 +40,7 @@
       padding: 0;
       margin: 0;
       display: flex;
-      flex-wrap: nowrap; /* Keep cards in one row */
+      flex-wrap: nowrap;
       justify-content: space-around;
     }
     .cs-item {
@@ -83,6 +86,38 @@
     .cs-button-solid:hover {
       background: #555;
     }
+    /* Reviews Section */
+    #reviews-439 {
+      background: #f9f9f9;
+      padding: 40px 20px;
+    }
+    #reviews-439 .cs-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #reviews-439 .cs-content {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #reviews-439 .cs-review {
+      font-size: 18px;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+    #reviews-439 .cs-author {
+      font-weight: bold;
+    }
+    #reviews-439 picture {
+      margin-top: 20px;
+    }
+    /* Full-page Sections */
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   </style>
 </head>
 <body>
@@ -100,7 +135,7 @@
         <!-- Heat Map Card -->
         <li class="cs-item">
           <h3>Heat Map</h3>
-          <p>This heat map displays the bus ridership in Charlottesville.</p>
+          <p>This heat map displays the UVA bus ridership in Charlottesville.</p>
           <div class="cs-visual">
             <picture class="cs-picture">
               <img loading="lazy" decoding="async" src="images/heat_map_thumbnail.png" alt="Heat Map Thumbnail" width="320" height="240">
@@ -108,31 +143,10 @@
           </div>
           <a href="heat_map.html" class="cs-button-solid">View Heat Map</a>
         </li>
-        <!-- Non-UVA Ridership Histogram Card -->
-        <li class="cs-item">
-          <h3>Non‑UVA Ridership Histogram</h3>
-          <p>The histogram shows non‑UVA bus ridership has three peaks at around 12 AM, 8 PM and 11 PM.</p>
-          <div class="cs-visual">
-            <picture class="cs-picture">
-              <img loading="lazy" decoding="async" src="images/non_uva_histogram.png" alt="Non‑UVA-affiliated Ridership Histogram Thumbnail" width="320" height="240">
-            </picture>
-          </div>
-          <a href="non_uva.html" class="cs-button-solid">View Histogram</a>
-        </li>
-        <!-- UVA Ridership Histogram Card -->
-        <li class="cs-item">
-          <h3>UVA Ridership Histogram</h3>
-          <p>The histogram shows UVA bus ridership peaks at around 9 PM, with a skewing to the left.</p>
-          <div class="cs-visual">
-            <picture class="cs-picture">
-              <img loading="lazy" decoding="async" src="images/uva_histogram.png" alt="UVA Ridership Histogram Thumbnail" width="320" height="240">
-            </picture>
-          </div>
-          <a href="uva.html" class="cs-button-solid">View Histogram</a>
-        </li>
+        <!-- Dot Density Map Card -->
         <li class="cs-item">
           <h3>Dot Density Map</h3>
-          <p>This dot density map visualizes the spatial distribution of bus ridership across Charlottesville.</p>
+          <p>This dot density map visualizes the spatial distribution of UVA bus ridership across Charlottesville.</p>
           <div class="cs-visual">
             <picture class="cs-picture">
               <source media="(min-width: 601px)" srcset="images/dot_dens_thumbnail.png">
@@ -141,7 +155,49 @@
           </div>
           <a href="dot_dens_map.html" class="cs-button-solid">View Dot Density Map</a>
         </li>
+        <!-- Non-UVA Ridership Histogram Card -->
+        <li class="cs-item">
+          <h3>Non‑UVA Ridership Histogram</h3>
+          <p>The histogram shows non‑UVA bus ridership has three peaks at around 12 AM, 8 PM and 11 PM.</p>
+          <div class="cs-visual">
+            <picture class="cs-picture">
+              <img loading="lazy" decoding="async" src="images/non_uva_histogram.png" alt="Non‑UVA Ridership Histogram Thumbnail" width="320" height="240">
+            </picture>
+          </div>
+          <a href="non_uva.html" class="cs-button-solid">View Histogram</a>
+        </li>
+        <!-- UVA Ridership Histogram Card -->
+        <li class="cs-item">
+          <h3>UVA Ridership Histogram</h3>
+          <p>The histogram shows UVA bus ridership peaks at around 9 PM.</p>
+          <div class="cs-visual">
+            <picture class="cs-picture">
+              <img loading="lazy" decoding="async" src="images/uva_histogram.png" alt="UVA Ridership Histogram Thumbnail" width="320" height="240">
+            </picture>
+          </div>
+          <a href="uva.html" class="cs-button-solid">View Histogram</a>
+        </li>
       </ul>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--                   Reviews                    -->
+  <!-- ============================================ -->
+  <section id="reviews-439">
+    <div class="cs-container">
+      <div class="cs-content">
+        <p class="cs-review">
+          <img class="cs-quote" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Reviews/quote-left.svg" alt="quote icon" width="120" height="106" loading="lazy" decoding="async" aria-hidden="true">
+          “We purchased our property in Katoomba from Landscape about 7 years ago. Landscape’s made the process so easy that when it came time to sell we knew immediately where to turn”
+        </p>
+        <span class="cs-author">Dany Olmo - Customer of Landscape</span>
+      </div>
+      <picture class="cs-picture">
+        <source media="(max-width: 600px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Reviews/man-m.jpg">
+        <source media="(min-width: 601px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Reviews/man.jpg">
+        <img loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Reviews/man.jpg" alt="person looking left" width="328" height="540" aria-hidden="true">
+      </picture>
     </div>
   </section>
 </body>
