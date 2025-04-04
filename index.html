@@ -47,8 +47,12 @@
       padding: 20px;
       width: 320px;
       border-radius: 4px;
+      transition: transform 0.3s ease;
     }
-    .cs-item h2 {
+    .cs-item:hover {
+      transform: scale(1.03);
+    }
+    .cs-item h3 {
       font-size: 24px;
       margin: 0 0 10px;
     }
@@ -60,7 +64,7 @@
     .cs-visual {
       margin-top: 10px;
     }
-    .cs-visual iframe, .cs-visual img {
+    .cs-visual img {
       width: 100%;
       height: auto;
       border: none;
@@ -95,11 +99,10 @@
       <ul class="cs-card-group">
         <!-- Heat Map Card -->
         <li class="cs-item">
-          <h2>Heat Map</h2>
+          <h3>Heat Map</h3>
           <p>This heat map displays the bus ridership in Charlottesville.</p>
           <div class="cs-visual">
             <picture class="cs-picture">
-              <source media="(min-width: 601px)" srcset="images/heat_map_thumbnail.png">
               <img loading="lazy" decoding="async" src="images/heat_map_thumbnail.png" alt="Heat Map Thumbnail" width="320" height="240">
             </picture>
           </div>
@@ -107,11 +110,10 @@
         </li>
         <!-- Non-UVA Ridership Histogram Card -->
         <li class="cs-item">
-          <h2>Non‑UVA Ridership Histogram</h2>
+          <h3>Non‑UVA Ridership Histogram</h3>
           <p>The histogram shows non‑UVA bus ridership, with a peak around 9 PM.</p>
           <div class="cs-visual">
             <picture class="cs-picture">
-              <source media="(min-width: 601px)" srcset="images/non_uva_histogram.png">
               <img loading="lazy" decoding="async" src="images/non_uva_histogram.png" alt="Non‑UVA Ridership Histogram Thumbnail" width="320" height="240">
             </picture>
           </div>
@@ -119,11 +121,10 @@
         </li>
         <!-- UVA Ridership Histogram Card -->
         <li class="cs-item">
-          <h2>UVA Ridership Histogram</h2>
+          <h3>UVA Ridership Histogram</h3>
           <p>The histogram shows UVA bus ridership, also peaking around 9 PM.</p>
           <div class="cs-visual">
             <picture class="cs-picture">
-              <source media="(min-width: 601px)" srcset="images/uva_histogram.png">
               <img loading="lazy" decoding="async" src="images/uva_histogram.png" alt="UVA Ridership Histogram Thumbnail" width="320" height="240">
             </picture>
           </div>
