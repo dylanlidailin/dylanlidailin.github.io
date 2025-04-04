@@ -1,111 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>UVA Bus Project</title>
-  <style>
-    /* Basic styling based on the provided template */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-      background: #f0f0f0;
-      color: #333;
-    }
-    .cs-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .cs-content {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .cs-topper {
-      display: block;
-      font-size: 14px;
-      letter-spacing: 1px;
-      color: #555;
-      text-transform: uppercase;
-    }
-    .cs-title {
-      font-size: 36px;
-      margin: 10px 0;
-    }
-    .cs-card-group {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-    }
-    .cs-item {
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      margin: 20px;
-      padding: 20px;
-      width: 320px;
-      border-radius: 4px;
-    }
-    .cs-item h2 {
-      font-size: 24px;
-      margin: 0 0 10px;
-    }
-    .cs-item p {
-      font-size: 16px;
-      margin: 0 0 10px;
-      line-height: 1.5;
-    }
-    .cs-visual {
-      margin-top: 10px;
-    }
-    .cs-visual iframe, .cs-visual img {
-      width: 100%;
-      height: auto;
-      border: none;
-      border-radius: 4px;
-    }
-  </style>
-</head>
-<body>
-  <!-- ============================================ -->
-  <!--                Visualizations              -->
-  <!-- ============================================ -->
-  <section id="visualizations">
-    <div class="cs-container">
-      <div class="cs-content">
-        <span class="cs-topper">UVA Bus Project</span>
-        <h2 class="cs-title">Visualizations & Analysis</h2>
-        <p>This site shows visualizations and analysis of bus ridership data in Charlottesville.</p>
-      </div>
-      <ul class="cs-card-group">
-        <!-- Heat Map Card -->
-        <li class="cs-item">
-          <h2>Heat Map</h2>
-          <p>This heat map displays the bus ridership in Charlottesville.</p>
-          <div class="cs-visual">
-            <iframe src="heat_map.html" style="width:100%; height:300px;"></iframe>
-          </div>
-        </li>
-        <!-- Non-UVA Ridership Histogram Card -->
-        <li class="cs-item">
-          <h2>Non-UVA Ridership Histogram</h2>
-          <p>The histogram shows non‑UVA bus ridership, with a peak around 9 PM.</p>
-          <div class="cs-visual">
-            <img src="images/non_uva.png" alt="Non-UVA Ridership Histogram">
-          </div>
-        </li>
-        <!-- UVA Ridership Histogram Card -->
-        <li class="cs-item">
-          <h2>UVA Ridership Histogram</h2>
-          <p>The histogram shows UVA bus ridership, also peaking around 9 PM.</p>
-          <div class="cs-visual">
-            <img src="images/uva.png" alt="UVA Ridership Histogram">
-          </div>
-        </li>
-      </ul>
-    </div>
+<!-- ============================================ -->
+<!--             Visualizations                 -->
+<!-- ============================================ -->
+
+<section id="visualizations">
+	<div class="cs-container">
+	  <div class="cs-content">
+		<span class="cs-topper">UVA Bus Project</span>
+		<h2 class="cs-title">Explore Our Visualizations</h2>
+		<p>Click on any card to see a full display of the visualization.</p>
+	  </div>
+	  <ul class="cs-card-group">
+		<!-- Heat Map Card -->
+		<li class="cs-item">
+		  <picture class="cs-picture">
+			<!-- Mobile Thumbnail -->
+			<source media="(max-width: 600px)" srcset="heat_map_thumbnail_mobile.png">
+			<!-- Desktop Thumbnail -->
+			<source media="(min-width: 601px)" srcset="heat_map_thumbnail.png">
+			<img loading="lazy" decoding="async" src="heat_map_thumbnail.png" alt="Heat Map" width="320" height="240">
+		  </picture>
+		  <div class="cs-info">
+			<h3 class="cs-h3">Heat Map</h3>
+			<p class="cs-item-text">View the full heat map of bus ridership in Charlottesville.</p>
+			<a href="heat_map.html" class="cs-button-solid">View Heat Map</a>
+		  </div>
+		</li>
+		<!-- Non-UVA Ridership Histogram Card -->
+		<li class="cs-item">
+		  <picture class="cs-picture">
+			<!-- Mobile Thumbnail -->
+			<source media="(max-width: 600px)" srcset="non_uva_histogram_mobile.png">
+			<!-- Desktop Thumbnail -->
+			<source media="(min-width: 601px)" srcset="non_uva_histogram.png">
+			<img loading="lazy" decoding="async" src="non_uva_histogram.png" alt="Non-UVA Ridership Histogram" width="320" height="240">
+		  </picture>
+		  <div class="cs-info">
+			<h3 class="cs-h3">Non-UVA Ridership Histogram</h3>
+			<p class="cs-item-text">Explore detailed trends in non‑UVA bus ridership.</p>
+			<a href="non_uva.html" class="cs-button-solid">View Histogram</a>
+		  </div>
+		</li>
+		<!-- UVA Ridership Histogram Card -->
+		<li class="cs-item">
+		  <picture class="cs-picture">
+			<!-- Mobile Thumbnail -->
+			<source media="(max-width: 600px)" srcset="uva_histogram_mobile.png">
+			<!-- Desktop Thumbnail -->
+			<source media="(min-width: 601px)" srcset="uva_histogram.png">
+			<img loading="lazy" decoding="async" src="uva_histogram.png" alt="UVA Ridership Histogram" width="320" height="240">
+		  </picture>
+		  <div class="cs-info">
+			<h3 class="cs-h3">UVA Ridership Histogram</h3>
+			<p class="cs-item-text">See a full breakdown of UVA bus ridership patterns.</p>
+			<a href="uva.html" class="cs-button-solid">View Histogram</a>
+		  </div>
+		</li>
+	  </ul>
+	</div>
+	
+	<!-- Optional background image (adapted from the hero template) -->
+	<picture class="cs-background">
+	  <source media="(max-width: 600px)" srcset="images/bus.png">
+	  <source media="(min-width: 601px)" srcset="images/bus.png">
+	  <img loading="lazy" decoding="async" src="images/bus.png" alt="background" width="1080" height="1920">
+	</picture>
   </section>
-</body>
-</html>
+  
