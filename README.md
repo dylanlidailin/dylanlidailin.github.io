@@ -3,4 +3,4 @@ This research investigates the difference in bus ridership between UVA-affiliate
 
 ![School Bus](https://github.com/user-attachments/assets/20dd439d-324f-4679-a302-882fc8328d80)
 
-[View PDF](./Infographic_bus.pdf)
+[View Infographic of the project!](./Infographic_bus.pdf)
