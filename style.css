@@ -16,3 +16,19 @@ body {
     font-size: 1.2em;
   }
   
+  .github-link {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #333;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    z-index: 1000;
+  }
+  .github-link:hover {
+    background: #555;
+  }
+  
