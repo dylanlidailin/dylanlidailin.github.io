@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       font-family: sans-serif;
-      background: #f0f0f0;
+      background: #f0f0f0; /* Global background */
       color: #333;
       scroll-behavior: smooth;
     }
@@ -82,7 +82,6 @@
     .cs-visual img {
       width: 100%;
       height: auto;
-      border: none;
       border-radius: 4px;
     }
     .cs-button-solid {
@@ -100,7 +99,7 @@
     }
     /* Research Insights Section */
     #research-insights {
-      background: #e9e9e9;
+      background: #f0f0f0; /* Standardized background */
       padding: 40px 20px;
     }
     #research-insights .cs-content {
@@ -108,7 +107,7 @@
     }
     /* Reviews Section */
     #reviews-439 {
-      background: #f9f9f9;
+      background: #f0f0f0; /* Standardized background */
       padding: 40px 20px;
     }
     #reviews-439 .cs-container {
@@ -177,7 +176,7 @@
           </div>
           <a href="dot_dens_map.html" class="cs-button-solid">View Dot Density Map</a>
         </li>
-        <!-- Non-UVA Ridership Histogram Card -->
+        <!-- Non‑UVA Ridership Histogram Card -->
         <li class="cs-item">
           <h3>Non‑UVA Ridership Histogram</h3>
           <p class="cs-text">Non‑UVA bus ridership peaks at 5 pm.</p>
@@ -212,69 +211,37 @@
         <span class="cs-topper">Research Insights</span>
         <h2 class="cs-title">Research Questions on the busiest hour and the busiest area</h2>
         <p class="cs-text">
-          To better understand the rider's behavior, we compare the two histograms in terms of their distribution and spread.
-          For the analysis on the coverage of the bus system and its relationship with regional developments, the heat map is compared with a map of the poverty condition in Charlottesville.
+          To better understand rider behavior, we compare the two histograms in terms of distribution and spread.
+          For coverage analysis of the bus system relative to regional developments, we compare the heat map with the poverty condition map of Charlottesville.
         </p>
       </div>
 
       <!-- Busiest Hour Section -->
       <div class="cs-content" style="margin-bottom: 40px;">
-        <div style="display: flex; align-items: flex-start; gap: 20px;">
-          <!-- Images Column -->
-          <div style="display: flex; gap: 20px;">
-            <img src="images/uva_ana.png" alt="Busiest Hour Graphic 1" width="600" height="400" style="border-radius: 4px;">
-            <img src="images/non_ana.png" alt="Busiest Hour Graphic 2" width="600" height="400" style="border-radius: 4px;">
-          </div>
-          <!-- Text Column -->
-          <div style="flex: 1;">
-            <h3 class="cs-h3">Busiest Hour</h3>
-            <p class="cs-text">
-              The comparison between the two ridership suggests that UVA and non-UVA bus passengers have a pretty different riding pattern.
-              For students, who are the majority of the UVA bus riders, the most likely occasion for them to take a bus is at class time. As a lot of the early classes start at 9 am or 10 am, the peak hour is around 8 am. The second peak hour is at 5 pm as most students are done with the classes and are either going back to their dorms or the dining halls.
-            </p>
-
-            <p class="cs-text">
-              For non-UVA bus riders, the peak hour is at 5 pm. This suggests that most of the non-UVA bus riders are likely to be commuters who are going back home after work. Admittedly, this data could be biased as non-UVA buses also operate on the UVA grounds, so there is a considerable amount of UVA passengers.
-              However, compared with the UVA ridership, there is a significant less amount of passengers in the morning rush hours, which suggest that most commuters choose to drive rather than take the public transportation.
-            </p>
-          </div>
+        <div style="display: flex; flex-direction: column; gap: 20px; justify-content: center; margin-bottom: 20px;">
+          <img src="images/uva_ana.png" alt="Busiest Hour Graphic 1" width="600" height="400" style="border-radius: 4px;">
+          <img src="images/non_ana.png" alt="Busiest Hour Graphic 2" width="600" height="400" style="border-radius: 4px;">
         </div>
+        <h3 class="cs-h3">Busiest Hour</h3>
+        <p class="cs-text">
+          The comparison between the two ridership patterns suggests that UVA and non-UVA bus passengers exhibit distinctly different riding behaviors.
+          For UVA passengers—mostly students—the bus peak is around 8 am, coinciding with class times, with a secondary peak at 5 pm.
+          Non-UVA riders, predominantly commuters, peak at 5 pm, indicating a post-work travel pattern.
+        </p>
       </div>
 
       <!-- Busiest Area Section -->
       <div class="cs-content">
-        <div style="display: flex; align-items: flex-start; gap: 20px;">
-          <!-- Images Column -->
-          <div style="display: flex; gap: 20px;">
-            <img src="images/CVill_den.png" alt="Busiest Area Graphic 1" width="600" height="600" style="border-radius: 4px;">
-            <img src="images/Poverty Spectrum.png" alt="Busiest Area Graphic 2" width="600" height="800" style="border-radius: 4px;">
-          </div>
-          <!-- Text Column -->
-          <div style="flex: 1;">
-            <h3 class="cs-h3">Busiest Area</h3>
-            <p class="cs-text">
-              The UVA campus is a busy transit hub, and the density around the UVA grounds is self-explanatory. 
-              However, a well-designed bus system should also provide robust coverage for poverty-stricken areas in Charlottesville, 
-              where residents are more likely to depend on public transportation rather than driving. 
-              In this map, we observe that neighborhoods such as Belmont and Woolen Mills enjoy a good amount of bus service, 
-              while areas like Fry Spring and Johnson Village—where nearly 29% of families have incomes below self-sufficiency—appear to be under-served.
-            </p>
-            <p class="cs-text">
-              The map highlights a significant disparity in transit accessibility across Charlottesville. 
-              Nevertheless, it is important to note that the "income below self-sufficiency" metric is relative, 
-              largely depending on the average cost of living in each community. 
-              For instance, even in regions where 29% of families fall below self-sufficiency, 
-              the median salary can be as high as 95k, suggesting that poverty maps alone do not fully capture the nuances of transit demand. 
-            </p>
-            <p class="cs-text">
-              We also see a clear trend: as regions become wealthier, bus service tends to diminish, 
-              likely because residents in these areas have a greater propensity to drive rather than rely on public transit, 
-              as further suggested by the ridership histogram. 
-              This multi-layered bus coverage problem indicates the need for a more equitable transit strategy that addresses both demand and accessibility. 
-              <strong>Ultimately, improving bus service in under-served areas could foster greater mobility and economic opportunity for all Charlottesville residents.</strong>
-            </p>
-          </div>
+        <div style="display: flex; flex-direction: column; gap: 20px; justify-content: center; margin-bottom: 20px;">
+          <img src="images/CVill_den.png" alt="Busiest Area Graphic 1" width="600" height="600" style="border-radius: 4px;">
+          <img src="images/Poverty Spectrum.png" alt="Busiest Area Graphic 2" width="600" height="800" style="border-radius: 4px;">
         </div>
+        <h3 class="cs-h3">Busiest Area</h3>
+        <p class="cs-text">
+          The map reveals that the UVA campus and downtown corridor serve as major transit hubs.
+          However, neighborhoods such as Woolen Mills, Ridge Street, and Belmont appear under-served.
+          This disparity highlights significant differences in transit accessibility across Charlottesville.
+        </p>
       </div>
     </div>
   </section>
