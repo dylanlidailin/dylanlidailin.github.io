@@ -104,14 +104,7 @@
       padding: 40px 20px;
     }
     #research-insights .cs-content {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    #research-insights .cs-flex {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: space-between;
-      gap: 20px;
+      margin-bottom: 40px;
     }
     /* Reviews Section */
     #reviews-439 {
@@ -213,41 +206,53 @@
   <!-- ============================================ -->
   <!--            Research Insights               -->
   <!-- ============================================ -->
-<section id="research-insights">
-  <div class="cs-container">
-    <div class="cs-content">
-      <span class="cs-topper">Research Insights</span>
-      <h2 class="cs-title">What can we know about the busiest hour and the busiest area in town?</h2>
-    </div>
+  <section id="research-insights">
+    <div class="cs-container">
+      <div class="cs-content">
+        <span class="cs-topper">Research Insights</span>
+        <h2 class="cs-title">Key Research Questions from the Infographic</h2>
+        <p class="cs-text">
+          Based on the information in <em>Infographic_bus.pdf</em>, two central questions guide this research: What is the busiest hour for bus ridership, and what are the busiest areas in Charlottesville?
+        </p>
+      </div>
 
-    <!-- Busiest Hour Section (Stacked) -->
-    <div class="cs-content" style="margin-bottom: 40px;">
-      <h3 class="cs-h3">Busiest Hour</h3>
-      <p class="cs-text">
-        The infographic indicates that UVA bus ridership reaches its peak around 9 PM—displaying a left-skewed distribution with a minor anomaly around midnight—while non-UVA ridership shows peaks at different times.
-      </p>
-      <!-- Two images side by side for Busiest Hour -->
-      <div style="display: flex; flex-direction: column; gap: 20px; justify-content: center;">
-        <img src="images/uva_ana.png" alt="Busiest Hour Graphic 1" width= "600px" height= "400px" style="border-radius: 4px;">
-        <img src="images/non_ana.png" alt="Busiest Hour Graphic 2" width= "600px" height= "400px" style="border-radius: 4px;">
+      <!-- Busiest Hour Section -->
+      <div class="cs-content" style="margin-bottom: 40px;">
+        <div style="display: flex; align-items: flex-start; gap: 20px;">
+          <!-- Images Column -->
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <img src="images/uva_ana.png" alt="Busiest Hour Graphic 1" width="600" height="400" style="border-radius: 4px;">
+            <img src="images/non_ana.png" alt="Busiest Hour Graphic 2" width="600" height="400" style="border-radius: 4px;">
+          </div>
+          <!-- Text Column -->
+          <div style="flex: 1;">
+            <h3 class="cs-h3">Busiest Hour</h3>
+            <p class="cs-text">
+              The infographic indicates that UVA bus ridership reaches its peak around 9 PM—displaying a left-skewed distribution with a minor anomaly around midnight—while non-UVA ridership shows peaks at different times.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Busiest Area Section -->
+      <div class="cs-content">
+        <div style="display: flex; align-items: flex-start; gap: 20px;">
+          <!-- Images Column -->
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <img src="images/CVill_den.png" alt="Busiest Area Graphic 1" width="600" height="600" style="border-radius: 4px;">
+            <img src="images/Poverty Spectrum.png" alt="Busiest Area Graphic 2" width="600" height="800" style="border-radius: 4px;">
+          </div>
+          <!-- Text Column -->
+          <div style="flex: 1;">
+            <h3 class="cs-h3">Busiest Area</h3>
+            <p class="cs-text">
+              According to the infographic, the UVA campus and downtown corridor are major transit hubs, while neighborhoods such as Woolen Mills, Ridge Street, and Belmont are underserved. This highlights a disparity in transit accessibility across Charlottesville.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- Busiest Area Section (Stacked) -->
-    <div class="cs-content">
-      <h3 class="cs-h3">Busiest Area</h3>
-      <p class="cs-text">
-        According to the infographic, the UVA campus and downtown corridor are major transit hubs, while neighborhoods such as Woolen Mills, Ridge Street, and Belmont are underserved. This highlights a disparity in transit accessibility across Charlottesville.
-      </p>
-      <!-- Two images side by side for Busiest Area -->
-      <div style="display: flex; flex-direction: column; gap: 20px; justify-content: center;">
-        <img src="images/CVill_den.png" alt="Busiest Area Graphic 1" width="600px" height="400px" style="border-radius: 4px;">
-        <img src="images/Poverty Spectrum.png" alt="Busiest Area Graphic 2" width="600px" height="400px" style="border-radius: 4px;">
-      </div>
-    </div>
-  </div>
-</section>
-
+  </section>
 
   <!-- ============================================ -->
   <!--                   Reviews                    -->
@@ -264,7 +269,7 @@
       <picture class="cs-picture">
         <source media="(max-width: 600px)" srcset="https://github.com/user-attachments/assets/20dd439d-324f-4679-a302-882fc8328d80">
         <source media="(min-width: 601px)" srcset="https://github.com/user-attachments/assets/20dd439d-324f-4679-a302-882fc8328d80">
-        <img loading="lazy" decoding="async" src="https://github.com/user-attachments/assets/20dd439d-324f-4679-a302-882fc8328d80" alt="person looking left" width="auto" height="auto" aria-hidden="true">
+        <img loading="lazy" decoding="async" src="https://github.com/user-attachments/assets/20dd439d-324f-4679-a302-882fc8328d80" alt="person looking left" width="328" height="540" aria-hidden="true">
       </picture>
     </div>
   </section>
