@@ -4,18 +4,23 @@
   <meta charset="utf-8">
   <title>Animated Histogram of UVA bus ridership</title>
   <style>
-    body {
+    /* Global Styles */
+    html, body {
       margin: 0;
       padding: 0;
+      padding-top: 50px; /* Added top padding to push content downward */
       font-family: sans-serif;
       background: #f0f0f0;
       color: #333;
+      scroll-behavior: smooth;
     }
+    /* Container */
     .cs-container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
     }
+    /* Flex layout for side-by-side sections */
     .cs-flex {
       display: flex;
       flex-wrap: nowrap;
