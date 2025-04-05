@@ -98,6 +98,21 @@
     .cs-button-solid:hover {
       background: #555;
     }
+    /* Research Insights Section */
+    #research-insights {
+      background: #e9e9e9;
+      padding: 40px 20px;
+    }
+    #research-insights .cs-content {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    #research-insights .cs-flex {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
     /* Reviews Section */
     #reviews-439 {
       background: #f9f9f9;
@@ -141,7 +156,9 @@
       <div class="cs-content">
         <span class="cs-topper">Bus Ridership Analysis Project</span>
         <h2 class="cs-title">Analysis on the Bus Ridership in Charlottesville</h2>
-        <p class="cs-text">This research investigates the difference in bus ridership between UVA-affiliated and non-UVA-affiliated buses in Charlottesville using data from the City of Charlottesville Open Data portal.</p>
+        <p class="cs-text">
+          This research investigates the difference in bus ridership between UVA-affiliated and non-UVA-affiliated buses in Charlottesville using data from the City of Charlottesville Open Data portal.
+        </p>
       </div>
       <ul class="cs-card-group">
         <!-- Heat Map Card -->
@@ -201,22 +218,34 @@
       <div class="cs-content">
         <span class="cs-topper">Research Insights</span>
         <h2 class="cs-title">Key Research Questions from the Infographic</h2>
-        <p class="cs-text">Based on the information in <em>Infographic_bus.pdf</em>, two central questions guide this research: What is the busiest hour for bus ridership and what are the busiest areas in Charlottesville?</p>
+        <p class="cs-text">
+          Based on the information in <em>Infographic_bus.pdf</em>, two central questions guide this research: What is the busiest hour for bus ridership, and what are the busiest areas in Charlottesville?
+        </p>
       </div>
       <div class="cs-flex">
+        <!-- Busiest Hour Block -->
         <div class="cs-content">
           <h3 class="cs-h3">Busiest Hour</h3>
           <p class="cs-text">
-            The Infographic indicates that UVA bus ridership reaches its peak around 9 PM, displaying a left-skewed distribution with a minor anomaly around midnight. In contrast, non-UVA ridership exhibits peaks at different times (such as 8 PM or 12 PM), suggesting that transit usage varies significantly between these groups.
+            The infographic indicates that UVA bus ridership reaches its peak around 9 PM—displaying a left-skewed distribution with a minor anomaly around midnight—while non-UVA ridership shows peaks at different times.
           </p>
-          <img src="images/uva.png" alt="Some descriptive alt text" width="300" height="200" style="margin-top: 10px;"/>
+          <!-- Two images side by side -->
+          <div style="display: flex; gap: 20px; justify-content: center;">
+            <img src="images/uva_ana.png" alt="Busiest Hour Graphic 1" width="300" height="200" style="border-radius: 4px;">
+            <img src="images/non_ana.png" alt="Busiest Hour Graphic 2" width="300" height="200" style="border-radius: 4px;">
+          </div>
         </div>
+        <!-- Busiest Area Block -->
         <div class="cs-content">
           <h3 class="cs-h3">Busiest Area</h3>
           <p class="cs-text">
-            According to the Infographic, the UVA campus and the downtown corridor function as major transit hubs. Meanwhile, areas like Woolen Mills, Ridge Street, and Belmont are notably underserved, highlighting a disparity in transit accessibility across Charlottesville.
+            According to the infographic, the UVA campus and downtown corridor are major transit hubs, while neighborhoods such as Woolen Mills, Ridge Street, and Belmont are underserved. This highlights a disparity in transit accessibility across Charlottesville.
           </p>
-          <img src="images/non_uva.png" alt="Some descriptive alt text" width="300" height="200" style="margin-top: 10px;"/>
+          <!-- Two images side by side -->
+          <div style="display: flex; gap: 20px; justify-content: center;">
+            <img src="images/uva_ana.png" alt="Busiest Area Graphic 1" width="300" height="200" style="border-radius: 4px;">
+            <img src="images/non_ana.png" alt="Busiest Area Graphic 2" width="300" height="200" style="border-radius: 4px;">
+          </div>
         </div>
       </div>
     </div>
