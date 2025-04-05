@@ -1,0 +1,96 @@
+---
+title: "uva.rmd"
+output: html_document
+date: "2025-04-04"
+---
+
+```{r}
+library(dplyr)
+library(tidyverse)
+library(leaflet)
+library(lubridate)
+library(sf)
+library(leaflet.extras)
+library(readr)
+library(gganimate)
+df <- read_csv("~/Downloads/Transit_2020.csv")
+```
+
+```{r}
+df$FareCategory = ifelse(grepl("UVA", df$FareCategory), "UVA", df$FareCategory)
+df <- df %>%
+  filter(FareCategory %in% c("UVA", "Trolley Free Ride"))
+df$FareCategory <- ifelse(grepl("UVA", df$FareCategory), "UVA", "Non-UVA")
+
+# Step 2: Classify stops based on whether they EVER had a UVA fare
+stop_type <- df %>%
+  group_by(Stop) %>%
+  summarise(StopType = ifelse(all(FareCategory == "UVA"), "UVA Stop", "Non-UVA Stop"))
+
+# Step 3: Join back into original data
+df <- df %>%
+  left_join(stop_type, by = "Stop")
+
+# Step 2: Create time features
+df <- df %>%
+  mutate(Date_Time = ymd_hms(Date_Time),
+         Hour = hour(Date_Time)-4,
+         Date = as.Date(Date_Time))
+
+df$Hour <- ifelse(df$Hour < 0, df$Hour + 24, df$Hour)
+
+# Step 3: Filter to weekdays
+df_weekdays <- df %>%
+  filter(wday(Date_Time) %in% 2:6)
+
+# Step 4: Total ridership per hour per day per StopType
+hourly_totals <- df_weekdays %>%
+  group_by(StopType, Date, Hour) %>%
+  summarise(Daily_Total_Ridership = sum(Count, na.rm = TRUE), .groups = "drop")
+
+# Step 5: Average ridership per hour per StopType
+hourly_avg <- hourly_totals %>%
+  group_by(StopType, Hour) %>%
+  summarise(Average_Ridership = mean(Daily_Total_Ridership, na.rm = TRUE), .groups = "drop")
+
+p <- ggplot(filter(hourly_avg, StopType == "UVA Stop"),
+       aes(x = Hour, y = Average_Ridership)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Weekday Total Ridership per Hour – UVA Stops",
+       x = "Hour of the Day", y = "Total Ridership per Hour") +
+  theme_classic() +
+  scale_x_continuous(breaks = seq(0, 23, 1))+
+  transition_time(Hour) +
+  ease_aes('linear')
+
+# Animate and save the output
+anim <- animate(p, nframes = 24, fps = 4, width = 600, height = 400, renderer = gifski_renderer(),end_pause = 10)
+anim_save("uva_ride.gif", animation = anim)
+```
+
+```{r}
+# (Assuming your data processing code is already done and df_anim contains one row per hour)
+df_anim <- filter(hourly_avg, StopType == "UVA Stop") %>%
+  arrange(Hour)
+
+# Create a cumulative data frame:
+df_cum <- do.call(rbind, lapply(sort(unique(df_anim$Hour)), function(h) {
+  subset <- df_anim %>% filter(Hour <= h)
+  subset$frame <- h  # add a new column for the animation frame
+  subset
+}))
+
+# Plot using transition_manual() based on the cumulative 'frame' column.
+p <- ggplot(df_cum, aes(x = factor(Hour), y = Average_Ridership)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Weekday Average Ridership per Hour – UVA Stops",
+       subtitle = "Up to Hour: {current_frame}",
+       x = "Hour of the Day", y = "Average Ridership per Hour") +
+  theme_classic() +
+  scale_x_discrete(limits = as.character(0:23)) +
+  transition_manual(frame)
+
+anim <- animate(p, nframes = length(unique(df_cum$frame)), fps = 4,
+                width = 600, height = 400, renderer = gifski_renderer(loop = FALSE))
+anim_save("cum_uva_histogram.gif", animation = anim)
+```
