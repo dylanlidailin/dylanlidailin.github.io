@@ -148,8 +148,8 @@ heat_map
 Save the interactive map as an HTML file and capture the HTML map as a PNG image
 
 ```{r}
-#saveWidget(heat_map, "heat_map.html")
-#webshot("heat_map.html", file = "heat_map.png")
+saveWidget(heat_map, "heat_map.html")
+webshot("heat_map.html", file = "heat_map.png")
 ```
 
 \*I created another heat map for non-UVA-affiliated bus.
@@ -207,8 +207,8 @@ circle_map
 Save the interactive map as an HTML file and capture the HTML map as a PNG image
 
 ```{r}
-#saveWidget(circle_map, "dot_dens_map.html",selfcontained = TRUE)
-#webshot("dot_dens_map.html", file = "dot_dens_map.png")
+saveWidget(circle_map, "dot_dens_map.html",selfcontained = TRUE)
+webshot("dot_dens_map.html", file = "dot_dens_map.png")
 ```
 
 ## Reflection
