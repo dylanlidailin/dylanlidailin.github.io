@@ -141,6 +141,8 @@ heat_map <- leaflet(df_uva)|>
     labelOptions = labelOptions(noHide = TRUE, direction = "top", textOnly = TRUE)
   ) |>
   setView(lng = -78.5070, lat = 38.0336, zoom = 13)
+
+heat_map
 ```
 
 Save the interactive map as an HTML file and capture the HTML map as a PNG image
@@ -153,7 +155,7 @@ Save the interactive map as an HTML file and capture the HTML map as a PNG image
 \*I created another heat map for non-UVA-affiliated bus.
 
 ```{r}
-heat_map <- leaflet(df_nonuva)|>
+heat_map_non <- leaflet(df_nonuva)|>
   addTiles() |>
   addHeatmap(
     lng = ~Longitude, lat = ~Latitude,
@@ -172,7 +174,7 @@ heat_map <- leaflet(df_nonuva)|>
     labelOptions = labelOptions(noHide = TRUE, direction = "top", textOnly = TRUE)
   ) |>
   setView(lng = -78.5070, lat = 38.0336, zoom = 13)
-heat_map
+heat_map_non
 ```
 
 ### The dot density map
