@@ -1,0 +1,244 @@
+---
+title: "Charlottesville Bus Ridership Analysis"
+author: "Dailin Li"
+date: "`r Sys.Date()`"
+---
+
+This research investigates the difference in bus ridership between UVA-affiliated and non-UVA-affiliated buses in Charlottesville using data from the City of Charlottesville Open Data portal. Two key questions are addressed: **What is the busiest hour of a weekday, and what are the busiest areas**?
+
+## Importing the libraries
+
+```{r}
+library(dplyr)
+library(tidyverse)
+library(leaflet)
+library(lubridate)
+library(sf)
+library(leaflet.extras)
+library(readr)
+library(htmlwidgets)
+library(webshot)
+library(htmlwidgets)
+df <- read_csv("Transit_2020.csv")
+```
+
+I imported the data set from "City of Charlottesville Open Data", a data set website by the Charlottesville government to provide access to the general public about the municipal information. The data set I chose took data from the two bus systems, The CAT (Charlottesville Area Transit) and the UVA transit system(gold lines, green lines, orange lines, silver lines). It collects the stops that the buses make with the stops' coordinates and time in the day.
+
+## Data Cleaning
+
+```{r}
+#Checking the FareCategory
+df |> group_by(FareCategory) |> summarise(n=n()) |> arrange(desc(n))
+
+#Take Trolley Free Ride to represent Non-UVA ride
+df$FareCategory = ifelse(grepl("UVA", df$FareCategory), "UVA", df$FareCategory)
+df <- df %>%
+  filter(FareCategory %in% c("UVA", "Trolley Free Ride"))
+df$FareCategory <- ifelse(grepl("UVA", df$FareCategory), "UVA", "Non-UVA")
+
+#Classify stops based on whether they are UVA fares
+stop_type <- df %>%
+  group_by(Stop) %>%
+  summarise(StopType = ifelse(all(FareCategory == "UVA"), "UVA Stop", "Non-UVA Stop"))
+
+#Join back into original data
+df <- df %>%
+  left_join(stop_type, by = "Stop")
+
+#Create time features
+df <- df %>%
+  mutate(Date_Time = ymd_hms(Date_Time),
+         Hour = hour(Date_Time)-4,
+         Date = as.Date(Date_Time))
+
+df$Hour <- ifelse(df$Hour < 0, df$Hour + 24, df$Hour)
+```
+
+## First Research Question
+
+My first research question was "What’s the busiest hour of a weekday?"
+
+### Histogram for UVA-bus ridership
+
+```{r}
+#Filter to weekdays
+df_weekdays <- df %>%
+  filter(wday(Date_Time) %in% 2:6)
+
+#Total ridership per hour per day per StopType
+hourly_totals <- df_weekdays %>%
+  group_by(StopType, Date, Hour) %>%
+  summarise(Daily_Total_Ridership = sum(Count, na.rm = TRUE), .groups = "drop")
+
+#Average ridership per hour per StopType
+hourly_avg <- hourly_totals %>%
+  group_by(StopType, Hour) %>%
+  summarise(Average_Ridership = mean(Daily_Total_Ridership, na.rm = TRUE), .groups = "drop")
+
+ggplot(filter(hourly_avg, StopType == "UVA Stop"),
+       aes(x = Hour, y = Average_Ridership)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Weekday Total Ridership per Hour – UVA Stops",
+       x = "Hour of the Day", y = "Total Ridership per Hour") +
+  theme_classic() +
+  scale_x_continuous(breaks = seq(0, 23, 1))
+```
+
+### Histogram for non-UVA ridership
+
+```{r}
+ggplot(filter(hourly_avg, StopType == "Non-UVA Stop"),
+       aes(x = Hour, y = Average_Ridership)) +
+  geom_bar(stat = "identity", fill = "firebrick") +
+  labs(title = "Weekday Average Ridership per Hour – Non-UVA Stops",
+       x = "Hour of the Day", y = "Average Ridership per Hour") +
+  theme_classic() +
+  scale_x_continuous(breaks = seq(0, 23, 1))
+```
+
+## Second Research Question
+
+My second research question was "What is the busiest area?" I first downloaded the Charlottesville region map from the Charlottesville open data. Then I used the leaflet package, a widget that can be rendered on HTML pages. I imported the Charlottesville map, and used the coordinates information of each stop from the Transit_2020 data set to create a heatmap and a dot density map. In addition, I created a marker using the coordinates of UVA, just to see what's the impact of UVA population on the stops of the buses.
+
+```{r}
+#classify uva and non-uva
+df_uva <- df %>%
+  filter(StopType == "UVA Stop") %>%
+  select(Latitude, Longitude, Count)
+
+df_nonuva <- df %>%
+  filter(StopType == "Non-UVA Stop") %>%
+  select(Latitude, Longitude, Count)
+```
+
+### The heat map of the UVA buses based on their stops
+
+```{r}
+#Create the boundary of Charlottesville
+charlottesville_boundary <- st_read("Municipal_Boundary_Area.geojson") 
+charlottesville_boundary <- st_zm(charlottesville_boundary)
+
+#Providing the UVA central grounds coordinates for a UVA marker
+uva_lat <- 38.0336
+uva_lon <- -78.5070
+
+heat_map <- leaflet(df_uva)|>
+  addTiles() |>
+  addHeatmap(
+    lng = ~Longitude, lat = ~Latitude,
+    intensity = ~Count, 
+    blur = 20, radius = 15, max = max(df_uva$Count, na.rm = TRUE)
+)|>
+  addPolygons(
+    data = charlottesville_boundary,
+    color = "blue", weight = 2, fillOpacity = 0.1,
+    popup = "Charlottesville City Boundary"
+  ) |>
+  addMarkers(
+    lng = uva_lon, lat = uva_lat,
+    popup = "University of Virginia",
+    label = "University of Virginia",
+    labelOptions = labelOptions(noHide = TRUE, direction = "top", textOnly = TRUE)
+  ) |>
+  setView(lng = -78.5070, lat = 38.0336, zoom = 13)
+```
+
+Save the interactive map as an HTML file and capture the HTML map as a PNG image
+
+```{r}
+#saveWidget(heat_map, "heat_map.html")
+#webshot("heat_map.html", file = "heat_map.png")
+```
+
+\*I created another heat map for non-UVA-affiliated bus.
+
+```{r}
+heat_map <- leaflet(df_nonuva)|>
+  addTiles() |>
+  addHeatmap(
+    lng = ~Longitude, lat = ~Latitude,
+    intensity = ~Count, 
+    blur = 20, radius = 15, max = max(df_nonuva$Count, na.rm = TRUE)
+)|>
+  addPolygons(
+    data = charlottesville_boundary,
+    color = "blue", weight = 2, fillOpacity = 0.1,
+    popup = "Charlottesville City Boundary"
+  ) |>
+  addMarkers(
+    lng = uva_lon, lat = uva_lat,
+    popup = "University of Virginia",
+    label = "University of Virginia",
+    labelOptions = labelOptions(noHide = TRUE, direction = "top", textOnly = TRUE)
+  ) |>
+  setView(lng = -78.5070, lat = 38.0336, zoom = 13)
+heat_map
+```
+
+### The dot density map
+
+```{r}
+circle_map <- leaflet(df_uva) |>
+  addTiles() |>
+  addCircles(
+    lng = ~Longitude, lat = ~Latitude,
+    radius = ~Count * 10,
+    weight = 1, color = "red", fillOpacity = 0.5,
+    popup = ~paste("Ridership Count:", Count)
+  ) |>
+  addPolygons(
+    data = charlottesville_boundary,
+    color = "blue", weight = 2, fillOpacity = 0.1,
+    popup = "Charlottesville City Boundary"
+  ) |>
+  addMarkers(
+    lng = uva_lon, lat = uva_lat,
+    popup = "University of Virginia",
+    label = "University of Virginia",
+    labelOptions = labelOptions(noHide = TRUE, direction = "top", textOnly = TRUE)
+  ) |>
+  setView(lng = -78.5070, lat = 38.0336, zoom = 13)
+```
+
+Save the interactive map as an HTML file and capture the HTML map as a PNG image
+
+```{r}
+#saveWidget(circle_map, "dot_dens_map.html",selfcontained = TRUE)
+#webshot("dot_dens_map.html", file = "dot_dens_map.png")
+```
+
+## Reflection
+
+### From the histograms
+
+The comparison between the two ridership suggests that UVA and non-UVA bus passengers have a pretty different riding pattern. For students, who are the majority of the UVA bus riders, the most likely occasion for them to take a bus is at class time. As a lot of the early classes start at 9 am or 10 am, the peak hour is around 8 am. The second peak hour is at 5 pm as most students are done with the classes and are either going back to their dorms or the dining halls.
+
+For non-UVA bus riders, the peak hour is at 5 pm. This suggests that most of the non-UVA bus riders are likely to be commuters who are going back home after work. Admittedly, this data could be biased as non-UVA buses also operate on the UVA grounds, so there is a considerable amount of UVA passengers. However, compared with the UVA ridership, there is a significant less amount of passengers in the morning rush hours, which suggest that most commuters choose to drive rather than take the public transportation.
+
+### From the heat map and the dot density map
+
+The UVA campus is a busy transit hub, and the density around the UVA grounds is self-explanatory. However, a well-designed bus system should also provide robust coverage for poverty-stricken areas in Charlottesville, where residents are more likely to depend on public transportation rather than driving. In this map, we observe that neighborhoods such as Belmont and Woolen Mills enjoy a good amount of bus service, while areas like Fry Spring and Johnson Village—where nearly 29% of families have incomes below self-sufficiency—appear to be under-served.
+
+The map highlights a significant disparity in transit accessibility across Charlottesville. Nevertheless, it is important to note that the "income below self-sufficiency" metric is relative, largely depending on the average cost of living in each community. For instance, even in regions where 29% of families fall below self-sufficiency, the median salary can be as high as 95k, suggesting that poverty maps alone do not fully capture the nuances of transit demand. 
+
+We also see a clear trend: as regions become wealthier, bus service tends to diminish, likely because residents in these areas have a greater propensity to drive rather than rely on public transit, as further suggested by the ridership histogram.
+
+## Conclusion
+
+This multi-layered bus coverage problem indicates the need for a more equitable transit strategy that addresses both demand and accessibility. Ultimately, improving bus service in under-served areas could foster greater mobility and economic opportunity for all Charlottesville residents.
+
+## Methodology Stats Test
+
+```{r}
+prop.test(c(52126,50921),c(103047,103047))
+#P(UVA)-P(Trolley) = [0.51,0.49]
+```
+
+```{r}
+# Get UVA and Non-UVA ridership vectors
+uva_ridership <- filter(hourly_avg, StopType == "UVA Stop")$Average_Ridership
+non_uva_ridership <- filter(hourly_avg, StopType == "Non-UVA Stop")$Average_Ridership
+
+# Perform Welch Two Sample t-test (assumes unequal variances)
+t.test(uva_ridership, non_uva_ridership, var.equal = FALSE)
+```
