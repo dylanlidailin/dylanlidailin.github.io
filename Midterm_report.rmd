@@ -198,6 +198,8 @@ circle_map <- leaflet(df_uva) |>
     labelOptions = labelOptions(noHide = TRUE, direction = "top", textOnly = TRUE)
   ) |>
   setView(lng = -78.5070, lat = 38.0336, zoom = 13)
+
+circle_map
 ```
 
 Save the interactive map as an HTML file and capture the HTML map as a PNG image
