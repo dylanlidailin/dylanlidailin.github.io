@@ -1,0 +1,38 @@
+# Load standard libraries for data manipulation and dates
+install.packages(c("tidyverse", "lubridate", "forecast", "sf"))
+library(tidyverse)
+library(lubridate)
+
+# Read the data
+df <- read_csv("../Data/Transit_2017.csv")
+
+# Convert Date_Time to a proper date object
+df$Date_Time <- ymd_hms(df$Date_Time)
+
+# Extract useful time features for aggregation
+df <- df %>%
+  mutate(
+    Date = as_date(Date_Time),
+    Hour = hour(Date_Time),
+    DayOfWeek = wday(Date_Time, label = TRUE)
+  )
+
+# Step 1: Aggregate data to get Total Riders per Day per Route
+daily_ridership <- df %>%
+  group_by(Date, Route, DayOfWeek) %>%
+  summarise(Total_Rides = sum(Count)) %>%
+  ungroup()
+
+# --- A. ANOVA ---
+# Test if the average daily ridership differs significantly between Routes
+anova_result <- aov(Total_Rides ~ Route, data = daily_ridership)
+summary(anova_result)
+
+# --- B. T-Test ---
+# Create a simpler dataset: Weekday vs. Weekend
+daily_ridership <- daily_ridership %>%
+  mutate(IsWeekend = ifelse(DayOfWeek %in% c("Sat", "Sun"), "Weekend", "Weekday"))
+
+# Test if ridership is significantly different on Weekends vs Weekdays
+t_test_result <- t.test(Total_Rides ~ IsWeekend, data = daily_ridership)
+print(t_test_result)
