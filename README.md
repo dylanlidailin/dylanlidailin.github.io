@@ -10,6 +10,7 @@ This research investigates the difference in bus ridership between UVA-affiliate
 3. Data Analysis: Statistical analysis was performed to compare ridership patterns between the two groups.
 4. Visualization: Graphs and charts were created to visualize the findings.
 5. Hypothesis Testing: ANOVA and T-Tests were conducted to determine the significance of differences in ridership.
-[A Comparative Boxplot of each route's ridership](images/Ridership_route.png)
+
+![A Comparative Boxplot of each route's ridership](images/Ridership_route.png)
 
 ![School Bus](https://github.com/user-attachments/assets/20dd439d-324f-4679-a302-882fc8328d80)
